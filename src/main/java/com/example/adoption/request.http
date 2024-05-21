@@ -1,0 +1,53 @@
+GET http://localhost:8080/adopters
+
+
+###############
+GET http://localhost:8080/adopters/2
+
+
+###############
+POST localhost:8080/adopters
+Content-Type: application/json
+
+{
+  "name": "Himanshu",
+  "phoneNumber": "134-134-1342",
+  "email": "Himanshu.patel@expeditors.com",
+  "animals": [
+    {
+      "name": "Lazzy",
+      "breed": "German Shepherd",
+      "age": "3",
+      "type": "cat"
+    }
+  ,
+
+    {
+      "name": "Suki",
+      "breed": "German Shepherd",
+      "age": "4",
+      "type": "dog"
+    }
+  ]
+}
+
+###############
+DELETE http://localhost:8080/adopters/5
+
+###############
+PUT http://localhost:8080/adopters/3
+Content-Type: application/json
+
+{
+  "name": "Test",
+  "phoneNumber": "000-000-0000",
+  "email": "testhpatel87@gmail.com",
+  "animals": [
+    {
+      "name": "kazzy",
+      "breed": "German Shepherd",
+      "age": 3,
+      "type": "cat"
+    }
+  ]
+}

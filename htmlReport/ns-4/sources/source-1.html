@@ -1,0 +1,155 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > DAOFactory</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.adoption.dao</a>
+</div>
+
+<h1>Coverage Summary for Class: DAOFactory (com.example.adoption.DAO)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DAOFactory</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/19)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.adoption.dao;
+&nbsp;
+&nbsp;import com.example.adoption.dao.InMemory.InMemoryAdopterDAO;
+&nbsp;import com.example.adoption.dao.jpa.JPAAdopterDAO;
+&nbsp;import com.example.adoption.service.AdopterService;
+&nbsp;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.ResourceBundle;
+&nbsp;import java.util.concurrent.ConcurrentHashMap;
+&nbsp;
+<b class="nc">&nbsp;public class DAOFactory {</b>
+&nbsp;
+<b class="nc">&nbsp;    private static Map&lt;String, Object&gt; objects = new ConcurrentHashMap&lt;&gt;();</b>
+&nbsp;    private static String profile;
+&nbsp;
+&nbsp;    static {
+&nbsp;        // This one is the package name
+<b class="nc">&nbsp;        ResourceBundle bundle = ResourceBundle.getBundle(&quot;com/example/adoption&quot;);</b>
+&nbsp;        //This is the properties name
+<b class="nc">&nbsp;        profile = bundle.getString(&quot;spring.profiles.active&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static AdopterDAO adopterDAO() {
+<b class="nc">&nbsp;        var result = switch(profile) {</b>
+&nbsp;            case &quot;inmem&quot; -&gt; {
+<b class="nc">&nbsp;                var current = (AdopterDAO) objects.get(&quot;adopterDAO&quot;);</b>
+<b class="nc">&nbsp;                if(current == null) {</b>
+<b class="nc">&nbsp;                    current = new InMemoryAdopterDAO();</b>
+<b class="nc">&nbsp;                    objects.put(&quot;adopterDAO&quot;, current);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                yield current;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            case &quot;jpa&quot; -&gt; (AdopterDAO) objects.computeIfAbsent(&quot;adopterDAO&quot;, (key) -&gt; {return new JPAAdopterDAO();});</b>
+<b class="nc">&nbsp;            default -&gt; throw new RuntimeException(&quot;Unknown profile: &quot; + profile);</b>
+&nbsp;        };
+&nbsp;
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static AdopterService studentService() {
+<b class="nc">&nbsp;        AdopterService ss = (AdopterService) objects.computeIfAbsent(&quot;adopterService&quot;, key -&gt; {</b>
+&nbsp;
+<b class="nc">&nbsp;            AdopterService newService = new AdopterService();</b>
+<b class="nc">&nbsp;            AdopterDAO dao = adopterDAO();</b>
+<b class="nc">&nbsp;            newService.setAdopterDAO(dao);</b>
+<b class="nc">&nbsp;            return newService;</b>
+&nbsp;        });
+&nbsp;
+<b class="nc">&nbsp;        return ss;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-12 09:40</div>
+</div>
+</body>
+</html>

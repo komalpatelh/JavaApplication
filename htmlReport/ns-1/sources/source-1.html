@@ -1,0 +1,183 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > AdoptionApplication</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.adoption</a>
+</div>
+
+<h1>Coverage Summary for Class: AdoptionApplication (com.example.adoption)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AdoptionApplication</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">AdoptionApplication$$SpringCGLIB$$0</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.adoption;
+&nbsp;
+&nbsp;import com.example.adoption.adopter.Adopter;
+&nbsp;import com.example.adoption.adopter.AdopterImpl;
+&nbsp;import com.example.adoption.animal.AnimalImpl;
+&nbsp;import com.example.adoption.animal.Cat;
+&nbsp;import com.example.adoption.animal.Dog;
+&nbsp;import com.example.adoption.dao.AdopterDAO;
+&nbsp;import com.example.adoption.dao.InMemory.InMemoryAdopterDAO;
+&nbsp;import com.example.adoption.dao.jpa.JPAAdopterDAO;
+&nbsp;import com.example.adoption.service.AdopterService;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.boot.CommandLineRunner;
+&nbsp;import org.springframework.boot.SpringApplication;
+&nbsp;import org.springframework.boot.autoconfigure.SpringBootApplication;
+&nbsp;import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+&nbsp;import org.springframework.context.annotation.Bean;
+&nbsp;import org.springframework.context.annotation.Profile;
+&nbsp;import org.springframework.stereotype.Component;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;import java.util.ResourceBundle;
+&nbsp;
+&nbsp;import static java.lang.System.out;
+&nbsp;
+&nbsp;@SpringBootApplication
+<b class="fc">&nbsp;public class AdoptionApplication {</b>
+&nbsp;
+&nbsp;
+&nbsp;	public static void main(String[] args) {
+<b class="nc">&nbsp;		SpringApplication.run(AdoptionApplication.class, args);</b>
+&nbsp;	}
+&nbsp;}
+&nbsp;	@Profile(&quot;!test&quot;)
+&nbsp;	@Component
+&nbsp;	class MyRunner implements CommandLineRunner {
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;		@Autowired
+&nbsp;		private AdopterService adopterService;
+&nbsp;		@Override
+&nbsp;		public void run(String... args) throws Exception {
+&nbsp;
+&nbsp;
+&nbsp;		Adopter person1 = new AdopterImpl(&quot;Komal&quot;, &quot;732-874-4554&quot;, &quot;komalhpatel87@gmail.com&quot;);
+&nbsp;		Adopter person2 = new AdopterImpl(&quot;Krishna&quot;, &quot;732-874-4554&quot;, &quot;komalhpatel87@gmail.com&quot;);
+&nbsp;
+&nbsp;
+&nbsp;		AnimalImpl animal1 = new Dog(&quot;Ozzy&quot;, &quot;German Shepherd&quot;, 7);
+&nbsp;		AnimalImpl animal2 = new Cat(&quot;Soju&quot;, &quot;American Curl Cat&quot;, 5);
+&nbsp;
+&nbsp;		adopterService.addAdopter(person1).
+&nbsp;
+&nbsp;		adoptAnimal(animal1);
+&nbsp;		adopterService.addAdopter(person2).
+&nbsp;
+&nbsp;		adoptAnimal(animal2);
+&nbsp;
+&nbsp;		List&lt;Adopter&gt; adopters = adopterService.getAllAdopters();
+&nbsp;			//System.out.println(&quot;Adopter: &quot;+adopters.getLast());
+&nbsp;			out.println(&quot;result: &quot; + adopters.size());
+&nbsp;			adopters.forEach(out::println);
+&nbsp;
+&nbsp;
+&nbsp;		}
+&nbsp;	}
+&nbsp;
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-12 09:40</div>
+</div>
+</body>
+</html>

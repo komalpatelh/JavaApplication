@@ -1,0 +1,13 @@
+services:
+  db:
+    image: postgres
+    container_name: adoption_app
+    environment:
+      POSTGRES_USER: larku
+      POSTGRES_PASSWORD: larku
+      POSTGRES_DB: adoptapp
+    ports:
+      - 5433:5432
+#    volumes: storage in your local machine to the container for long term storage
+
+

@@ -1,0 +1,59 @@
+package com.example.adoption.controller;
+
+import com.example.adoption.adopter.Adopter;
+import com.example.adoption.adopter.AdopterImpl;
+import com.example.adoption.service.AdopterService;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+@ExtendWith(MockitoExtension.class)
+class AdopterServiceControllerTestM {
+
+    @Mock
+    private AdopterService adopterService;
+
+    @InjectMocks
+    private AdopterServiceController controller;
+
+    List<Adopter> adopters = List.of(
+             new AdopterImpl(1,"Test1","111-222-3333","test1@gmail.com"),
+                 new AdopterImpl(2,"Test2","111-222-3333","test2@gmail.com")
+    );
+
+
+    @Test
+    void testGetAll() {
+
+        Mockito.when(adopterService.getAllAdopters()).thenReturn( adopters);
+
+        List<Adopter> result = controller.getAll();
+        assertEquals(2,adopters.size());
+
+        Mockito.verify(adopterService.getAllAdopters());
+
+    }
+
+    @Test
+    void getAdopter() {
+    }
+
+    @Test
+    void addAdopter() {
+    }
+
+    @Test
+    void deleteAdopter() {
+    }
+
+    @Test
+    void updateAdopter() {
+    }
+}
